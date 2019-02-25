@@ -4,7 +4,10 @@
   "description": "Voxel server launcher accessed via a web browser",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "copy": "cpx \"src/**/*.{html,css,json}\" build",
+    "copy_watch": "cpx \"src/**/*.{html,css,json}\" build --watch",
     "lint": "standard",
     "lint-fix": "standard --fix"
   },
@@ -46,6 +49,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
+    "@types/node": "^11.9.5",
+    "cpx": "^1.5.0",
     "tslint": "^5.13.0",
     "tslint-config-standard": "^8.0.1"
   }
