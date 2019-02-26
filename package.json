@@ -4,10 +4,8 @@
   "description": "Voxel server launcher accessed via a web browser",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "copy": "cpx \"src/**/*.{html,css,json}\" build",
-    "copy_watch": "cpx \"src/**/*.{html,css,json}\" build --watch",
+    "build": "webpack",
+    "watch": "webpack --watch",
     "lint": "standard",
     "lint-fix": "standard --fix"
   },
@@ -39,19 +37,18 @@
   "dependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
-    "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^5.0.0",
     "three": "^0.101.1",
     "typescript": "^3.3.3333",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
-    "webpack-node-externals": "^1.7.2"
+    "webpack": "^4.29.5"
   },
   "devDependencies": {
     "@types/node": "^11.9.5",
-    "cpx": "^1.5.0",
+    "awesome-typescript-loader": "^5.2.1",
     "tslint": "^5.13.0",
-    "tslint-config-standard": "^8.0.1"
+    "tslint-config-standard": "^8.0.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-node-externals": "^1.7.2"
   }
 }
