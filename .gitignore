@@ -64,5 +64,5 @@ typings/
 # Private files
 worlds/*
 plugins/*
-build/
+/build/
 server.properties.json
