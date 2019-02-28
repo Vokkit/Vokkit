@@ -65,4 +65,5 @@ typings/
 worlds/*
 plugins/*
 /build/
+src/client/dist
 server.properties.json

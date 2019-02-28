@@ -4,8 +4,8 @@
   "description": "Voxel server launcher accessed via a web browser",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "build": "tsc",
+    "watch": "tsc --watch",
     "lint": "standard",
     "lint-fix": "standard --fix"
   },
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@types/node": "^11.9.5",
+    "@types/webpack": "^4.4.25",
     "awesome-typescript-loader": "^5.2.1",
     "tslint": "^5.13.0",
     "tslint-config-standard": "^8.0.1",

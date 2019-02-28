@@ -41,8 +41,20 @@ export class PluginManager {
     pluginMain.onLoad()
   }
 
+  static applyServerPlugins () {
+    this.pluginList.forEach((plugin) => {
+      this.applyServerPlugin(plugin)
+    })
+  }
+
   static applyClientPlugin (plugin: PluginManifest) {
     // TODO: Client의 PluginManager 코드 수정
+  }
+
+  static applyClientPlugins () {
+    this.pluginList.forEach((plugin) => {
+      this.applyClientPlugin(plugin)
+    })
   }
 
   static isPluginManifest (manifest: any): manifest is PluginManifest {
