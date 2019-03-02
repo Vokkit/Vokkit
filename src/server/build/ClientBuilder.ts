@@ -13,7 +13,6 @@ export class ClientBuilder {
         webpackConfig.entry = path.resolve('src/client/Vokkit.ts')
       }
       webpack(webpackConfig, (err, stats) => {
-        // console.log(err, stats)
         if (err || stats.hasErrors()) {
           reject(new Error(stats.toString()))
         }
