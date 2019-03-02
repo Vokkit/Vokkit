@@ -2,10 +2,10 @@ import webpack from 'webpack'
 import path from 'path'
 
 const config: webpack.Configuration = {
-  entry: path.resolve('src/client/Vokkit.js'),
+  entry: path.resolve('src/client/Vokkit.ts'),
   output: {
     filename: 'index.js',
-    path: path.resolve('src/client/dist')
+    path: path.resolve('build/client/dist')
   },
   target: 'web',
   module: {

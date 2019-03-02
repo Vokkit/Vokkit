@@ -4,10 +4,8 @@
   "description": "Voxel server launcher accessed via a web browser",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "lint": "standard",
-    "lint-fix": "standard --fix"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
