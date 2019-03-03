@@ -1,3 +1,4 @@
 {
-  "server_plugin_main_type_error": "{name} 플러그인의 서버 메인 클래스가 PluginBase를 상속하지 않습니다."
+  "server_plugin_main_type_error": "{name} 플러그인의 서버 메인 클래스가 PluginBase를 상속하지 않습니다.",
+  "client_build_error": "클라이언트를 빌드하는 데 오류가 발생했습니다.\n{error}"
 }

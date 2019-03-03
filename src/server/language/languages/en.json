@@ -1,3 +1,4 @@
 {
-  "server_plugin_main_type_error": "Server main class of plugin {name} does not inherit PluginBase."
+  "server_plugin_main_type_error": "Server main class of plugin {name} does not inherit PluginBase.",
+  "client_build_error": "There was an error while building the client source.\n{error}"
 }
