@@ -3,6 +3,7 @@ import { ServerProperty } from './property/ServerProperty'
 import { ServerPropertyLoader } from './property/ServerPropertyLoader'
 import { PluginManager } from './plugin/PluginManager'
 import { ClientBuilder } from './build/ClientBuilder'
+import { Logger } from './utils/Logger';
 
 export class Server {
   private property: ServerProperty
@@ -13,8 +14,8 @@ export class Server {
     PluginManager.loadPlugins()
     PluginManager.applyServerPlugins()
     PluginManager.applyClientPlugins()
-    ClientBuilder.build().catch((err) => {
-      // TODO
+    ClientBuilder.build().catch((error) => {
+      if (error) Logger.error(this.languageFormatter.format('client_build_error', { error }))
     })
   }
 
