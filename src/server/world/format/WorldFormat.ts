@@ -1,13 +1,13 @@
-import { BlockData } from '../World'
+import { World } from '../World'
 
 export class WorldReader {
-  static read (worldDirectory: string): BlockData[] {
-    return []
+  static read (worldDirectory: string): World {
+    return null
   }
 }
 
 export class WorldWriter {
-  static write (worldDirectory: string, worldData: BlockData[]): void {
+  static write (worldDirectory: string, worldData: World): void {
     return
   }
 }
