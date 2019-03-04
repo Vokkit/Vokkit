@@ -1,7 +1,8 @@
-import fs from 'fs'
-import path from 'path'
 import { LanguageNotFoundError } from './error/LanguageNotFoundError'
 import { LanguageData } from './LanguageData'
+
+import fs from 'fs'
+import path from 'path'
 
 export class LanguageLoader {
   private static cache: { [languageName: string]: LanguageData } = {}

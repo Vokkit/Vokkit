@@ -1,5 +1,6 @@
-import readline from 'readline'
 import { ConsoleColor } from './ConsoleColor'
+
+import readline from 'readline'
 
 export class Logger {
   private static clear () {

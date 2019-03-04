@@ -3,7 +3,7 @@ import { ServerProperty } from './property/ServerProperty'
 import { ServerPropertyLoader } from './property/ServerPropertyLoader'
 import { PluginManager } from './plugin/PluginManager'
 import { ClientBuilder } from './build/ClientBuilder'
-import { Logger } from './utils/Logger';
+import { Logger } from './utils/Logger'
 
 export class Server {
   private property: ServerProperty
