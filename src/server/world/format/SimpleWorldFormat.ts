@@ -1,7 +1,8 @@
+import { Block, World } from '../World'
+import { WorldReader, WorldWriter, WorldFormatChecker } from './WorldFormat'
+
 import fs from 'fs'
 import path from 'path'
-import { Block, World } from '../World'
-import { WorldReader, WorldWriter } from './WorldFormat'
 
 export class SimpleWorldReader extends WorldReader {
   static read (worldDirectory: string) {
@@ -20,6 +21,28 @@ export class SimpleWorldReader extends WorldReader {
   }
 }
 
+export class SimpleWorldFormatChecker extends WorldFormatChecker {
+  static check (worldDirectory: string, checkFiles = false) {
+    if (!super.check(worldDirectory, checkFiles)) {
+      return false
+    }
+    if (fs.readFileSync(path.join(worldDirectory, 'format.txt')).toString() === 'SimpleWorldFormat') { // Format Name Check
+      if (checkFiles) {
+        const dataPath = path.join(worldDirectory, 'data.spw')
+        if (!fs.existsSync(dataPath)) { // No Data File
+          return false
+        }
+        const buffer = fs.readFileSync(path.join(worldDirectory, 'data.spw'))
+        if (buffer.length % 16 !== 0) { // Check Data (x, y, z, id -> 4 * 4Byte = 16 Byte = 1 Block)
+          return false
+        }
+      }
+      return true
+    }
+    return false
+  }
+}
+
 export class SimpleWorldWriter extends WorldWriter {
   static write (worldDirectory: string, world: World) {
     const blockData = world.getBlockData()
@@ -32,6 +55,6 @@ export class SimpleWorldWriter extends WorldWriter {
     })
     fs.writeFileSync(path.join(worldDirectory, 'data.spw'), buffer)
     fs.writeFileSync(path.join(worldDirectory, 'worldName.txt'), world.getWorldName())
-    fs.writeFileSync(path.join(worldDirectory, 'format.txt'), 'SimpleWorldWriter')
+    fs.writeFileSync(path.join(worldDirectory, 'format.txt'), 'SimpleWorldFormat')
   }
 }
