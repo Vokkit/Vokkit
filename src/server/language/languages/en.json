@@ -1,4 +1,12 @@
 {
   "server_plugin_main_type_error": "Server main class of plugin {name} does not inherit PluginBase.",
-  "client_build_error": "There was an error while building the client source.\n{error}"
+
+  "client_build_error": "There was an error while building the client source.\n{error}",
+  "server_no_world": "There is no loadable world in worlds folder. Shutting down server...",
+  "server_world_loaded": "Successfully loaded {number} world(s).",
+
+  "world_loading_started": "Loading world {worldPath}...",
+  "world_loaded": "Successfully loaded world {worldPath}.",
+  "world_format_file_not_exist": "World format file does not exist.",
+  "world_unknown_format_name": "Unknown world format name: {format}"
 }

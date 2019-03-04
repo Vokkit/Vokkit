@@ -8,7 +8,7 @@ export class LanguageLoader {
   private static cache: { [languageName: string]: LanguageData } = {}
   static load (languageName: string): LanguageData {
     if (!this.cache[languageName]) {
-      this.cache[languageName] = JSON.parse(this.loadFile(`./languages/${languageName}.json`))
+      this.cache[languageName] = JSON.parse(this.loadFile(path.join(__dirname, `languages/${languageName}.json`)))
     }
     return this.cache[languageName]
   }
@@ -22,7 +22,7 @@ export class LanguageLoader {
 
   static appendLanguageData (languageName: string, additionalData: LanguageData) {
     if (!this.cache[languageName]) {
-      this.cache[languageName] = JSON.parse(this.loadFile(path.join(path.resolve(''), `./languages/${languageName}.json`)))
+      this.cache[languageName] = JSON.parse(this.loadFile(path.join(__dirname, `languages/${languageName}.json`)))
     }
     Object.assign(this.cache[languageName], additionalData)
   }
