@@ -7,7 +7,7 @@ import fs from 'fs'
 
 export class PluginManager {
   static clientSource = ``
-  static pluginPath = path.join(path.resolve(''), 'plugins')
+  static pluginPath = path.resolve('plugins')
   static pluginExtension = 'zip'
   static pluginList: PluginManifest[]
 
