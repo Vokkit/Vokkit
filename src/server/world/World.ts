@@ -1,4 +1,4 @@
-export interface BlockData {
+export interface Block {
   x: number,
   y: number,
   z: number,
@@ -6,12 +6,19 @@ export interface BlockData {
 }
 
 export class World {
-  private blockData: BlockData[]
-  constructor () {
-    this.blockData = []
+  private worldName: string
+  private blockData: Block[]
+
+  constructor (worldName: string, blockData: Block[] = []) {
+    this.worldName = worldName
+    this.blockData = blockData
   }
 
-  setBlock (newBlock: BlockData) {
+  getWorldName () {
+    return this.worldName
+  }
+
+  setBlock (newBlock: Block) {
     const changed = this.blockData.some((block) => {
       if (block.x === newBlock.x && block.y === newBlock.y && block.z === newBlock.z) {
         block.id = newBlock.id
@@ -27,7 +34,7 @@ export class World {
     return this.blockData
   }
 
-  setBlockData (blockData: BlockData[]) {
+  setBlockData (blockData: Block[]) {
     this.blockData = blockData
   }
 }
