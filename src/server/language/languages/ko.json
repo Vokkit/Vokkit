@@ -8,5 +8,7 @@
   "world_loading_started": "세계 {worldPath}을(를) 불러오는 중...",
   "world_loaded": "세계 {worldPath}을(를) 불러왔습니다.",
   "world_format_file_not_exist": "세계 형식 파일이 존재하지 않습니다.",
-  "world_unknown_format_name": "알 수 없는 세계 형식 이름입니다: {format}"
+  "world_unknown_format_name": "알 수 없는 세계 형식 이름입니다: {format}",
+
+  "network_error_handler": "네트워크 핸들러 {name}에서 오류가 발생했습니다.\n{error}"
 }
