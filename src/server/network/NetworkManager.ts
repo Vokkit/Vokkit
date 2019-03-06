@@ -26,7 +26,7 @@ export class NetworkManager {
       try {
         handler.onConnection(socket)
       } catch (error) {
-        Logger.error(Vokkit.getServer().getLanguageFormatter().format('network_error_handler', { name: handler.constructor.name, error: error }))
+        Logger.error(Vokkit.getServer().getLanguageFormatter().format('network_handler_error', { name: handler.constructor.name, error: error }))
       }
     })
   }
