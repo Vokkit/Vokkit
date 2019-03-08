@@ -48,10 +48,11 @@ export class SimpleWorldWriter extends WorldWriter {
     const blockData = world.getBlockData()
     const buffer = Buffer.alloc(blockData.length * 16)
     blockData.forEach((block, i) => {
-      buffer.writeInt32LE(block.x, i)
-      buffer.writeInt32LE(block.y, i + 4)
-      buffer.writeInt32LE(block.z, i + 8)
-      buffer.writeUInt32LE(block.id, i + 12)
+      const index = i * 16
+      buffer.writeInt32LE(block.x, index)
+      buffer.writeInt32LE(block.y, index + 4)
+      buffer.writeInt32LE(block.z, index + 8)
+      buffer.writeUInt32LE(block.id, index + 12)
     })
     fs.writeFileSync(path.join(worldDirectory, 'data.spw'), buffer)
     fs.writeFileSync(path.join(worldDirectory, 'worldName.txt'), world.getName())
