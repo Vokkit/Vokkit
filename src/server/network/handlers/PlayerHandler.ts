@@ -1,6 +1,7 @@
 import { SocketHandler } from './SocketHandler'
 import { Player } from '../../player/Player'
 import { Vokkit } from '../../Vokkit'
+import { Location } from '../../utils/Location'
 
 export interface PlayerLoginData {
   name: string
@@ -30,7 +31,7 @@ export class PlayerHandler extends SocketHandler {
       socket.emit('login_result', { success: false, reason: 'name_already_exist' })
       return
     }
-    const player = new Player(socket, data.name)
+    const player = new Player(socket, data.name, new Location(Vokkit.getServer().getWorlds()[0])) // todo: spawn location
     Vokkit.getServer().getPlayers().push(player)
     socket.emit('login_result', { success: true })
   }

@@ -46,4 +46,8 @@ export class Server {
   getPlayers () {
     return this.players
   }
+
+  getWorlds () {
+    return this.worlds
+  }
 }

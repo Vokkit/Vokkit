@@ -1,9 +1,12 @@
+import { SocketHandler } from './handlers/SocketHandler'
+import { Logger } from '../utils/Logger'
+import { Vokkit } from '../Vokkit'
+
+import { PlayerHandler } from './handlers/PlayerHandler'
+
 import express from 'express'
 import http from 'http'
 import SocketIO from 'socket.io'
-import { SocketHandler } from './handlers/SocketHandler'
-import { Logger } from '../utils/Logger';
-import { Vokkit } from '../Vokkit';
 
 export class NetworkManager {
   private static app: Express.Application
@@ -17,6 +20,7 @@ export class NetworkManager {
     this.io = SocketIO(this.server)
 
     // TODO: add default handlers
+    this.addSocketHandler(new PlayerHandler())
 
     this.io.on('connection', (socket) => this.onConnection(socket))
   }
