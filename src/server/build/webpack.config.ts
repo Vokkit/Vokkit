@@ -19,7 +19,8 @@ const config: webpack.Configuration = {
             babelCore: '@babel/core',
             babelOptions: {
               babelrc: true
-            }
+            },
+            silent: true
           }
         },
         exclude: /node_modules/

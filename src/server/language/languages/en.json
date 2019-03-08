@@ -2,6 +2,7 @@
   "server_plugin_main_type_error": "Server main class of plugin {name} does not inherit PluginBase.",
 
   "client_build_error": "There was an error while building the client source.\n{error}",
+  "client_build_success": "Client building finished.",
   "server_no_world": "There is no loadable world in worlds folder. Shutting down server...",
   "server_world_loaded": "Successfully loaded {number} world(s).",
   "server_opening": "Opening Server...",

@@ -22,7 +22,9 @@ export class Server {
     PluginManager.loadPlugins()
     PluginManager.applyServerPlugins()
     PluginManager.applyClientPlugins()
-    ClientBuilder.build().catch((error) => {
+    ClientBuilder.build().then(() => {
+      Logger.info(this.languageFormatter.format('client_build_success'))
+    }).catch((error) => {
       if (error) Logger.error(this.languageFormatter.format('client_build_error', { error }))
     })
 
