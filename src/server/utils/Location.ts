@@ -54,4 +54,11 @@ export class Location {
   clone () {
     return new Location(this.world, this.x, this.y, this.z)
   }
+
+  copy (location: Location) {
+    this.world = location.getWorld()
+    this.x = location.getX()
+    this.y = location.getY()
+    this.z = location.getZ()
+  }
 }

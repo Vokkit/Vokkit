@@ -1,14 +1,14 @@
 import { Location } from '../utils/Location'
+import { Entity } from '../entity/Entity'
 
-export class Player {
-  private socket: SocketIO.Socket
-  private name: string
-  private location: Location
+export class Player extends Entity {
+  protected socket: SocketIO.Socket
+  protected name: string
 
   constructor (socket: SocketIO.Socket, name: string, location: Location) {
+    super(location)
     this.socket = socket
     this.name = name
-    this.location = location
   }
 
   getName () {
@@ -17,13 +17,5 @@ export class Player {
 
   getSocket () {
     return this.socket
-  }
-
-  getLocation () {
-    return this.location.clone() // readonly
-  }
-
-  teleport () {
-    // todo
   }
 }
