@@ -4,6 +4,8 @@
   "client_build_error": "클라이언트를 빌드하는 데 오류가 발생했습니다.\n{error}",
   "server_no_world": "worlds 폴더에 불러올 수 있는 세계가 없습니다. 서버를 종료합니다...",
   "server_world_loaded": "{number}개의 세계를 불러왔습니다.",
+  "server_opening": "서버를 여는 중...",
+  "server_opened": "완료!",
 
   "world_loading_started": "세계 {worldPath}을(를) 불러오는 중...",
   "world_loaded": "세계 {worldPath}을(를) 불러왔습니다.",

@@ -4,6 +4,8 @@
   "client_build_error": "There was an error while building the client source.\n{error}",
   "server_no_world": "There is no loadable world in worlds folder. Shutting down server...",
   "server_world_loaded": "Successfully loaded {number} world(s).",
+  "server_opening": "Opening Server...",
+  "server_opened": "Done!",
 
   "world_loading_started": "Loading world {worldPath}...",
   "world_loaded": "Successfully loaded world {worldPath}.",
