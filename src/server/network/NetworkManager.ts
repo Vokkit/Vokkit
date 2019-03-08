@@ -21,6 +21,7 @@ export class NetworkManager {
     this.io = SocketIO(this.server)
 
     // TODO: add default handlers
+    this.handlers = []
     this.addSocketHandler(new PlayerHandler())
     this.addSocketHandler(new ChatHandler())
 
