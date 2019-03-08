@@ -10,5 +10,7 @@
   "world_format_file_not_exist": "세계 형식 파일이 존재하지 않습니다.",
   "world_unknown_format_name": "알 수 없는 세계 형식 이름입니다: {format}",
 
-  "network_handler_error": "네트워크 핸들러 {name}에서 오류가 발생했습니다.\n{error}"
+  "network_handler_error": "네트워크 핸들러 {name}에서 오류가 발생했습니다.\n{error}",
+
+  "chat_format": "<{sender}> {message}"
 }

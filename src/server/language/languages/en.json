@@ -10,5 +10,7 @@
   "world_format_file_not_exist": "World format file does not exist.",
   "world_unknown_format_name": "Unknown world format name: {format}",
 
-  "network_handler_error": "There was an error while handling network on handler {name}.\n{error}"
+  "network_handler_error": "There was an error while handling network on handler {name}.\n{error}",
+
+  "chat_format": "<{sender}> {message}"
 }

@@ -7,6 +7,7 @@ import { Logger } from './utils/Logger'
 import { WorldLoader } from './world/WorldLoader'
 import { World } from './world/World'
 import { Player } from './player/Player'
+import { NetworkManager } from './network/NetworkManager'
 
 export class Server {
   private properties: ServerProperties
@@ -31,6 +32,10 @@ export class Server {
       process.exit()
     }
     Logger.info(this.languageFormatter.format('server_world_loaded', { number: this.worlds.length.toString() }))
+
+    Logger.info(this.languageFormatter.format('server_opening'))
+    NetworkManager.openServer(this.properties.port)
+    Logger.info(this.languageFormatter.format('server_opened', { port: this.properties.port.toString() }))
 
     this.players = []
   }

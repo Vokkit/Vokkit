@@ -3,6 +3,7 @@ import { Logger } from '../utils/Logger'
 import { Vokkit } from '../Vokkit'
 
 import { PlayerHandler } from './handlers/PlayerHandler'
+import { ChatHandler } from './handlers/ChatHandler'
 
 import express from 'express'
 import http from 'http'
@@ -14,15 +15,18 @@ export class NetworkManager {
   private static io: SocketIO.Server
   private static handlers: SocketHandler[]
 
-  static openServer () {
+  static openServer (port: number) {
     this.app = express()
     this.server = http.createServer(this.app)
     this.io = SocketIO(this.server)
 
     // TODO: add default handlers
     this.addSocketHandler(new PlayerHandler())
+    this.addSocketHandler(new ChatHandler())
 
     this.io.on('connection', (socket) => this.onConnection(socket))
+
+    this.server.listen(port)
   }
 
   static onConnection (socket: SocketIO.Socket) {
@@ -43,5 +47,9 @@ export class NetworkManager {
 
   static removeSocketHandler (handler: SocketHandler | number) {
     this.handlers.splice(typeof handler === 'number' ? handler : this.handlers.indexOf(handler), 1)
+  }
+
+  static getSocket () {
+    return this.io
   }
 }
