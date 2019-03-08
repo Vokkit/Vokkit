@@ -54,7 +54,7 @@ export class SimpleWorldWriter extends WorldWriter {
       buffer.writeUInt32LE(block.id, i + 12)
     })
     fs.writeFileSync(path.join(worldDirectory, 'data.spw'), buffer)
-    fs.writeFileSync(path.join(worldDirectory, 'worldName.txt'), world.getWorldName())
+    fs.writeFileSync(path.join(worldDirectory, 'worldName.txt'), world.getName())
     fs.writeFileSync(path.join(worldDirectory, 'format.txt'), 'SimpleWorldFormat')
   }
 }

@@ -6,16 +6,16 @@ export interface Block {
 }
 
 export class World {
-  private worldName: string
+  private name: string
   private blockData: Block[]
 
-  constructor (worldName: string, blockData: Block[] = []) {
-    this.worldName = worldName
+  constructor (name: string, blockData: Block[] = []) {
+    this.name = name
     this.blockData = blockData
   }
 
-  getWorldName () {
-    return this.worldName
+  getName () {
+    return this.name
   }
 
   setBlock (newBlock: Block) {

@@ -47,7 +47,31 @@ export class Server {
     return this.players
   }
 
+  getPlayer (name: string) {
+    for (const player of this.players) {
+      if (player.getName() === name) {
+        return player
+      }
+    }
+  }
+
+  getPlayerBySocket (socket: SocketIO.Socket) {
+    for (const player of this.players) {
+      if (player.getSocket() === socket) {
+        return player
+      }
+    }
+  }
+
   getWorlds () {
     return this.worlds
+  }
+
+  getWorld (name: string) {
+    for (const world of this.worlds) {
+      if (world.getName() === name) {
+        return world
+      }
+    }
   }
 }
