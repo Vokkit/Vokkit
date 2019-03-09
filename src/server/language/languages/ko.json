@@ -7,6 +7,7 @@
   "server_world_loaded": "{number}개의 세계를 불러왔습니다.",
   "server_opening": "서버를 여는 중...",
   "server_opened": "완료!",
+  "server_title": "Vokkit {version} ({onlineUsers}명 접속 중)",
 
   "world_loading_started": "세계 {worldPath}을(를) 불러오는 중...",
   "world_loaded": "세계 {worldPath}을(를) 불러왔습니다.",
@@ -15,5 +16,8 @@
 
   "network_handler_error": "네트워크 핸들러 {name}에서 오류가 발생했습니다.\n{error}",
 
-  "chat_format": "<{sender}> {message}"
+  "chat_format": "<{sender}> {message}",
+
+  "player_join_message": "{name} 님이 게임에 참여하셨습니다.",
+  "player_quit_message": "{name} 님이 퇴장하셨습나다."
 }
