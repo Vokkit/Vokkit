@@ -30,4 +30,8 @@ export class Logger {
     this.clear()
     this.log(message, ConsoleColor.FgRed, 'ERROR')
   }
+
+  static setTitle (title: any) {
+    process.stdout.write(`${String.fromCharCode(27)}]0;${title}${String.fromCharCode(7)}`)
+  }
 }

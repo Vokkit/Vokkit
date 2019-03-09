@@ -12,7 +12,7 @@ export class ChatHandler extends SocketHandler {
   }
 
   onChat (socket: SocketIO.Socket, data: ChatData) {
-    const player = Vokkit.getServer().getPlayerBySocket(socket)
+    const player = Vokkit.getServer().getPlayerById(socket.id)
     if (!player) {
       // Error: player sent chat without login
       // Todo: check and ban ip

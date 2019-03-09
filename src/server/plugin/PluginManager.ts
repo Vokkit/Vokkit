@@ -1,6 +1,8 @@
 import { Vokkit } from '../Vokkit'
 import { PluginManifest, PluginManifestProperties } from './PluginManifest'
 import { PluginBase } from './PluginBase'
+import { Event } from '../event/Event'
+import { EventPriority } from '../event/EventPriority'
 
 import path from 'path'
 import fs from 'fs'
@@ -10,9 +12,11 @@ export class PluginManager {
   static pluginPath = path.resolve('plugins')
   static pluginExtension = 'zip'
   static pluginList: PluginManifest[]
+  static eventListeners: { eventName: string, listener: (event: Event) => any, eventPriority: number }[]
 
   static loadPlugins () {
     this.pluginList = []
+    this.eventListeners = []
     const pluginList = fs.readdirSync(this.pluginPath)
     pluginList.forEach((pluginfileName) => {
       const pluginDir = path.join(this.pluginPath, pluginfileName)
@@ -66,5 +70,21 @@ export class PluginManager {
       if (manifest[key] && typeof manifest[key] !== PluginManifestProperties.optional[key]) return false
     }
     return true
+  }
+
+  static addEventListener (eventName: string, listener: (event: Event) => any, eventPriority = EventPriority.NORMAL) {
+    this.eventListeners.push({ eventName, listener, eventPriority })
+  }
+
+  static callEvent (event: Event) {
+    const eventName = event.getEventName()
+    for (let eventPriority = EventPriority.HIGHEST; eventPriority >= EventPriority.MONITOR; eventPriority--) {
+      this.eventListeners.forEach((eventListener) => {
+        if (eventListener.eventPriority === eventPriority && eventListener.eventName === eventName) {
+          eventListener.listener(event)
+        }
+      })
+    }
+    return event
   }
 }

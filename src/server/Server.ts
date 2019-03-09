@@ -15,6 +15,8 @@ export class Server {
   private worlds: World[]
   private players: Player[]
 
+  public static version = '1.0.0'
+
   init () {
     this.properties = ServerPropertyLoader.load()
     this.languageFormatter = new LanguageFormatter(this.properties.language)
@@ -62,12 +64,16 @@ export class Server {
     }
   }
 
-  getPlayerBySocket (socket: SocketIO.Socket) {
+  getPlayerById (id: string) {
     for (const player of this.players) {
-      if (player.getSocket() === socket) {
+      if (player.getSocket().id === id) {
         return player
       }
     }
+  }
+
+  removePlayer (player: Player) {
+    this.players.splice(this.players.indexOf(player), 1)
   }
 
   getWorlds () {
@@ -80,5 +86,9 @@ export class Server {
         return world
       }
     }
+  }
+
+  broadcast (message: string) {
+    NetworkManager.getSocket().emit('message', { message })
   }
 }
