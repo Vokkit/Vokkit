@@ -49,7 +49,7 @@ export class PlayerHandler extends SocketHandler {
     PluginManager.callEvent(event)
 
     socket.emit('login_result', { success: true })
-    NetworkManager.getSocket().emit('player_join', { player, silent: event.isSilent() }) // todo: change player to object
+    NetworkManager.getSocket().emit('player_join', { player: player.toObject(), silent: event.isSilent() })
   }
 
   private onDisconnect (socket: SocketIO.Socket) {

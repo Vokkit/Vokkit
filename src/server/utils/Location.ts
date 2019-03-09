@@ -1,5 +1,12 @@
 import { World } from '../world/World'
 
+export class LocationObject {
+  world: string
+  x: number
+  y: number
+  z: number
+}
+
 export class Location {
   private world: World
   private x: number
@@ -60,5 +67,9 @@ export class Location {
     this.x = location.getX()
     this.y = location.getY()
     this.z = location.getZ()
+  }
+
+  toObject (): LocationObject {
+    return { world: this.world.getName(), x: this.x, y: this.y, z: this.z }
   }
 }

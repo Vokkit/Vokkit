@@ -1,5 +1,10 @@
-import { Location } from '../utils/Location'
+import { Location, LocationObject } from '../utils/Location'
 import { Entity } from '../entity/Entity'
+
+export interface PlayerObject {
+  name: string,
+  location: LocationObject
+}
 
 export class Player extends Entity {
   protected socket: SocketIO.Socket
@@ -17,5 +22,12 @@ export class Player extends Entity {
 
   getSocket () {
     return this.socket
+  }
+
+  toObject (): PlayerObject {
+    return {
+      name: this.name,
+      location: this.location.toObject()
+    }
   }
 }
