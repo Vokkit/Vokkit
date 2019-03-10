@@ -14,8 +14,8 @@ export class SimpleWorldReader extends WorldReader {
     while (true) {
       const chunkSize = buffer.readUInt32LE(index) * 6
       const chunkPosition: ChunkPosition = {
-        x: buffer.readUInt32LE(index + 4) * 16,
-        z: buffer.readUInt32LE(index + 8) * 16
+        x: buffer.readInt32LE(index + 4) * 16,
+        z: buffer.readInt32LE(index + 8) * 16
       }
       const chunk = new Chunk(chunkPosition)
       for (let i = 0; i < chunkSize; i += 6) {
@@ -66,8 +66,8 @@ export class SimpleWorldWriter extends WorldWriter {
     chunks.forEach((chunk) => {
       const chunkSize = chunk.getBlockAmount()
       buffer.writeUInt32LE(index, chunkSize)
-      buffer.writeUInt32LE(index + 4, chunk.getPosition().x / 16)
-      buffer.writeUInt32LE(index + 8, chunk.getPosition().z / 16)
+      buffer.writeInt32LE(index + 4, chunk.getPosition().x / 16)
+      buffer.writeInt32LE(index + 8, chunk.getPosition().z / 16)
       const blockData = chunk.getBlockData()
       for (let i = 0; i < blockData.length; i += 6) {
         const xz = i >> 8
