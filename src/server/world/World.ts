@@ -1,17 +1,18 @@
+import { Chunk } from './Chunk'
+import { Position } from '../utils/Position'
+
 export interface Block {
-  x: number,
-  y: number,
-  z: number,
+  position: Position
   id: number
 }
 
 export class World {
   private name: string
-  private blockData: Block[]
+  private chunks: Chunk[]
 
-  constructor (name: string, blockData: Block[] = []) {
+  constructor (name: string, chunks: Chunk[] = []) {
     this.name = name
-    this.blockData = blockData
+    this.chunks = chunks
   }
 
   getName () {
@@ -19,22 +20,22 @@ export class World {
   }
 
   setBlock (newBlock: Block) {
-    const changed = this.blockData.some((block) => {
-      if (block.x === newBlock.x && block.y === newBlock.y && block.z === newBlock.z) {
-        block.id = newBlock.id
-        return true
+    for (const chunk of this.chunks) {
+      if (chunk.checkPosition(newBlock.position)) {
+        chunk.setBlock(newBlock)
       }
-    })
-    if (!changed) {
-      this.blockData.push(newBlock)
     }
   }
 
-  getBlockData () {
-    return this.blockData
+  getBlock (position: Position) {
+    for (const chunk of this.chunks) {
+      if (chunk.checkPosition(position)) {
+        return chunk.getBlock(position)
+      }
+    }
   }
 
-  setBlockData (blockData: Block[]) {
-    this.blockData = blockData
+  getChunks () {
+    return this.chunks
   }
 }
