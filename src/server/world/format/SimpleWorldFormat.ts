@@ -1,23 +1,36 @@
 import { Block, World } from '../World'
 import { WorldReader, WorldWriter, WorldFormatChecker } from './WorldFormat'
+import { Chunk, ChunkPosition } from '../Chunk'
+import { Position } from '../../utils/Position'
 
 import fs from 'fs'
 import path from 'path'
 
 export class SimpleWorldReader extends WorldReader {
   static read (worldDirectory: string) {
-    const blockData: Block[] = []
+    const chunks: Chunk[] = []
     const buffer = fs.readFileSync(path.join(worldDirectory, 'data.spw')) // (SimPleWorld)
-    for (let i = 0; i < buffer.length; i += 16) {
-      blockData.push({
-        x: buffer.readInt32LE(i),
-        y: buffer.readInt32LE(i + 4),
-        z: buffer.readInt32LE(i + 8),
-        id: buffer.readUInt32LE(i + 12)
-      })
+    let index = 0
+    while (true) {
+      const chunkSize = buffer.readUInt32LE(index) * 6
+      const chunkPosition: ChunkPosition = {
+        x: buffer.readUInt32LE(index + 4) * 16,
+        z: buffer.readUInt32LE(index + 8) * 16
+      }
+      const chunk = new Chunk(chunkPosition)
+      for (let i = 0; i < chunkSize; i += 6) {
+        const xz = buffer.readUInt8(index + i + 12)
+        chunk.setBlock({
+          position: { x: xz >> 4, y: buffer.readUInt8(index + i + 13), z: xz % 16 },
+          id: buffer.readUInt32LE(index + i + 14)
+        }, false)
+      }
+      chunks.push(chunk)
+      index += chunkSize + 12
+      if (index >= buffer.length) break
     }
     const worldName = fs.readFileSync(path.join(worldDirectory, 'worldName.txt')).toString()
-    return new World(worldName, blockData)
+    return new World(worldName, chunks)
   }
 }
 
@@ -33,9 +46,7 @@ export class SimpleWorldFormatChecker extends WorldFormatChecker {
           return false
         }
         const buffer = fs.readFileSync(path.join(worldDirectory, 'data.spw'))
-        if (buffer.length % 16 !== 0) { // Check Data (x, y, z, id -> 4 * 4Byte = 16 Byte = 1 Block)
-          return false
-        }
+        // todo
       }
       return true
     }
@@ -45,15 +56,29 @@ export class SimpleWorldFormatChecker extends WorldFormatChecker {
 
 export class SimpleWorldWriter extends WorldWriter {
   static write (worldDirectory: string, world: World) {
-    const blockData = world.getBlockData()
-    const buffer = Buffer.alloc(blockData.length * 16)
-    blockData.forEach((block, i) => {
-      const index = i * 16
-      buffer.writeInt32LE(block.x, index)
-      buffer.writeInt32LE(block.y, index + 4)
-      buffer.writeInt32LE(block.z, index + 8)
-      buffer.writeUInt32LE(block.id, index + 12)
+    const chunks = world.getChunks()
+
+    let size = 0
+    chunks.forEach((chunk) => size += chunk.getBlockAmount() * 6 + 12)
+    const buffer = Buffer.alloc(size)
+
+    let index = 0
+    chunks.forEach((chunk) => {
+      const chunkSize = chunk.getBlockAmount()
+      buffer.writeUInt32LE(index, chunkSize)
+      buffer.writeUInt32LE(index + 4, chunk.getPosition().x / 16)
+      buffer.writeUInt32LE(index + 8, chunk.getPosition().z / 16)
+      const blockData = chunk.getBlockData()
+      for (let i = 0; i < blockData.length; i += 6) {
+        const xz = i >> 8
+        const y = i % 256
+        buffer.writeUInt8(index + i + 12, xz)
+        buffer.writeUInt8(index + i + 13, y)
+        buffer.writeUInt32LE(index + i + 14, blockData.readUInt8(i))
+      }
+      index += chunkSize + 12
     })
+
     fs.writeFileSync(path.join(worldDirectory, 'data.spw'), buffer)
     fs.writeFileSync(path.join(worldDirectory, 'worldName.txt'), world.getName())
     fs.writeFileSync(path.join(worldDirectory, 'format.txt'), 'SimpleWorldFormat')

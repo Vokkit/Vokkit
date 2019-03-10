@@ -10,25 +10,31 @@ export class Chunk {
   private position: ChunkPosition
   private blockData: Buffer
 
-  constructor (position: ChunkPosition, blockData = Buffer.alloc(393216)) {
+  static maxSize = 262144
+
+  constructor (position: ChunkPosition, blockData = Buffer.alloc(Chunk.maxSize)) {
     this.position = position
-    this.blockData = blockData // x 4bit, z 4bit, y 8bit, id 32bit 순서로 한 블럭당 6Byte 사용
+    this.blockData = blockData
   }
 
   getBlock (position: Position, checkPosition = true) {
     if (!checkPosition || this.isPosition(position)) {
-      const index = (position.x * 4096 + position.z * 256 + position.y) * 6
-      return this.blockData.readUInt32LE(index + 2)
+      return this.blockData.readUInt32LE((position.x * 4096 + position.z * 256 + position.y) * 6)
     }
   }
 
   setBlock (newBlock: Block, checkPosition = true) {
     if (!checkPosition || this.isPosition(newBlock.position)) {
-      const index = (newBlock.position.x * 4096 + newBlock.position.z * 256 + newBlock.position.y) * 6
-      this.blockData.writeUInt8(index, newBlock.position.x * 16 + newBlock.position.z)
-      this.blockData.writeUInt8(index + 1, newBlock.position.y)
-      this.blockData.writeUInt32LE(index + 2, newBlock.id)
+      this.blockData.writeUInt32LE((newBlock.position.x * 4096 + newBlock.position.z * 256 + newBlock.position.y) * 6, newBlock.id)
     }
+  }
+
+  getBlockData () {
+    return this.blockData
+  }
+
+  getPosition () {
+    return this.position
   }
 
   private isPosition (position: any): position is Position {
@@ -42,5 +48,11 @@ export class Chunk {
 
   checkPosition (position: Position) {
     return position.x >= this.position.x && position.x < this.position.x + 16 && position.z >= this.position.z && position.z < this.position.z + 16
+  }
+
+  getBlockAmount () {
+    let amount = 0
+    for (const id of this.blockData) if (id !== 0) amount++
+    return amount
   }
 }
