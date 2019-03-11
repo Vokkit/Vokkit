@@ -1,4 +1,4 @@
-import { Chunk } from './Chunk'
+import { Chunk, ChunkPosition } from './Chunk'
 import { Position } from '../utils/Position'
 
 export interface Block {
@@ -31,6 +31,14 @@ export class World {
     for (const chunk of this.chunks) {
       if (chunk.checkPosition(position)) {
         return chunk.getBlock(position)
+      }
+    }
+  }
+
+  getChunk (position: ChunkPosition) {
+    for (const chunk of this.chunks) {
+      if (chunk.checkPosition(position)) {
+        return chunk
       }
     }
   }

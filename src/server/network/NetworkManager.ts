@@ -4,6 +4,7 @@ import { Vokkit } from '../Vokkit'
 
 import { PlayerHandler } from './handlers/PlayerHandler'
 import { ChatHandler } from './handlers/ChatHandler'
+import { ChunkHandler } from './handlers/ChunkHandler'
 
 import express from 'express'
 import http from 'http'
@@ -24,6 +25,7 @@ export class NetworkManager {
     this.handlers = []
     this.addSocketHandler(new PlayerHandler())
     this.addSocketHandler(new ChatHandler())
+    this.addSocketHandler(new ChunkHandler())
 
     this.io.on('connection', (socket) => this.onConnection(socket))
 

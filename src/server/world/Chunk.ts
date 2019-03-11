@@ -46,7 +46,7 @@ export class Chunk {
     return false
   }
 
-  checkPosition (position: Position) {
+  checkPosition (position: ChunkPosition) {
     return position.x >= this.position.x && position.x < this.position.x + 16 && position.z >= this.position.z && position.z < this.position.z + 16
   }
 
