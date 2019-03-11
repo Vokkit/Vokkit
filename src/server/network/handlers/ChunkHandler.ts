@@ -18,6 +18,6 @@ export class ChunkHandler extends SocketHandler {
       socket.emit('chunk', { success: false, reason: 'world_name_not_exist' })
     }
     const chunk = world.getChunk(data.position)
-    socket.emit('chunk', { success: true, chunk: chunk })
+    socket.emit('chunk', { success: true, chunk: chunk.getBlockData() })
   }
 }
