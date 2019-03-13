@@ -6,6 +6,10 @@ export class Vokkit {
     this.client = new Client()
     this.client.init()
   }
+
+  static getClient () {
+    return this.client
+  }
 }
 
 Vokkit.init()
