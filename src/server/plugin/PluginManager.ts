@@ -8,7 +8,8 @@ import path from 'path'
 import fs from 'fs'
 
 export class PluginManager {
-  static clientSource = ``
+  static clientPluginManagerPath = path.resolve('/src/client/plugin/PluginManager.ts')
+  static clientPluginManagerSourcePath = path.resolve('./client/PluginManager.txt')
   static pluginPath = path.resolve('plugins')
   static pluginExtension = 'zip'
   static pluginList: PluginManifest[]
@@ -51,14 +52,18 @@ export class PluginManager {
     })
   }
 
-  static applyClientPlugin (plugin: PluginManifest) {
+  private static applyClientPlugin (plugin: PluginManifest) {
     // TODO: Client의 PluginManager 코드 수정
+    return `${plugin.name}: require('${plugin.path}')`
   }
 
   static applyClientPlugins () {
+    const clientPluginManagerSource = fs.readFileSync(this.clientPluginManagerSourcePath).toString()
+    const replaceSource: string[] = []
     this.pluginList.forEach((plugin) => {
-      this.applyClientPlugin(plugin)
+      replaceSource.push(this.applyClientPlugin(plugin))
     })
+    fs.writeFileSync(this.clientPluginManagerPath, clientPluginManagerSource.replace('// {Replacement}', replaceSource.join(',\n')))
   }
 
   static isPluginManifest (manifest: any): manifest is PluginManifest {
