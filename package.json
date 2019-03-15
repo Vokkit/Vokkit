@@ -48,6 +48,7 @@
     "@types/express": "^4.16.1",
     "@types/node": "^11.9.5",
     "@types/socket.io": "^2.1.2",
+    "@types/socket.io-client": "^1.4.32",
     "@types/webpack": "^4.4.25",
     "awesome-typescript-loader": "^5.2.1",
     "express": "^4.16.4",
