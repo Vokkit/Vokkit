@@ -2,6 +2,7 @@ import { SocketHandler } from './handlers/SocketHandler'
 
 import io from 'socket.io-client'
 import { Vokkit } from '../Vokkit'
+import { PlayerLoginHandler } from './handlers/PlayerLoginHandler'
 
 export class NetworkManager {
   private static socket: SocketIOClient.Socket
@@ -13,6 +14,7 @@ export class NetworkManager {
 
     // TODO: add default handlers
     this.handlers = []
+    this.addSocketHandler(new PlayerLoginHandler())
   }
 
   static onConnect () {
