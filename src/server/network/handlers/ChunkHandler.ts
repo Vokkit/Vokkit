@@ -9,7 +9,7 @@ export interface ChunkData {
 
 export class ChunkHandler extends SocketHandler {
   onConnection (socket: SocketIO.Socket) {
-    socket.on('chunk', (data: ChunkData) => this.onChunkLoad(socket, data))
+    socket.on('chunk', (data: ChunkData) => this.onChunkLoad(socket, data)) // todo: send chunk without getting request (dangerous)
   }
 
   onChunkLoad (socket: SocketIO.Socket, data: ChunkData) {
@@ -18,6 +18,6 @@ export class ChunkHandler extends SocketHandler {
       socket.emit('chunk', { success: false, reason: 'world_name_not_exist' })
     }
     const chunk = world.getChunk(data.position)
-    socket.emit('chunk', { success: true, chunk: chunk.getBlockData() })
+    socket.emit('chunk', { success: true, chunk: chunk.toJSON(), worldName: data.worldName })
   }
 }

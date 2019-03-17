@@ -55,4 +55,11 @@ export class Chunk {
     for (const id of this.blockData) if (id !== 0) amount++
     return amount
   }
+
+  toJSON () {
+    return {
+      position: this.position,
+      blockData: this.blockData.toJSON()
+    }
+  }
 }

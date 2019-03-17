@@ -43,6 +43,14 @@ export class World {
     }
   }
 
+  addChunk (chunk: Chunk) {
+    this.chunks.push(chunk)
+  }
+
+  removeChunk (chunk: Chunk) {
+    this.chunks.splice(this.chunks.indexOf(chunk), 1)
+  }
+
   getChunks () {
     return this.chunks
   }
