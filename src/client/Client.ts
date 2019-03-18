@@ -7,6 +7,7 @@ import { World } from './world/World'
 export class Client {
   private language: string
   private languageFormatter: LanguageFormatter
+  private worlds: World[]
 
   init () {
     this.language = UserLanguageLoader.load()
@@ -21,8 +22,19 @@ export class Client {
     return this.languageFormatter
   }
 
-  getWorld (worldName: string): World {
-    // TODO
-    return null
+  getWorlds () {
+    return this.worlds
+  }
+
+  getWorld (name: string) {
+    for (const world of this.worlds) {
+      if (world.getName() === name) {
+        return world
+      }
+    }
+  }
+
+  addWorld (world: World) {
+    if (!this.worlds.includes(world)) this.worlds.push(world)
   }
 }
