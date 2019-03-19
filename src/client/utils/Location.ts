@@ -1,5 +1,5 @@
 import { World } from '../world/World'
-import { Vokkit } from '../Vokkit';
+import { Vokkit } from '../Vokkit'
 
 export class LocationObject {
   world: string
@@ -75,6 +75,6 @@ export class Location {
   }
 
   static fromObject (object: LocationObject) {
-    // todo return new Location(Vokkit.getClient().getWorld(object.world), object.x, object.y, object.z)
+    return new Location(Vokkit.getClient().getWorld(object.world), object.x, object.y, object.z)
   }
 }

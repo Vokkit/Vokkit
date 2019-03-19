@@ -1,6 +1,5 @@
 import { Location } from '../utils/Location'
 
-// 8 + 10 + 2 + 5 + 3 + 2 = 30 -> 420점.
 export class Entity {
   protected location: Location
 
