@@ -16,6 +16,7 @@ export class ChatHandler extends SocketHandler {
     if (!player) {
       // Error: player sent chat without login
       // Todo: check and ban ip
+      socket.disconnect()
       return
     }
     NetworkManager.getSocket().emit('chat', {

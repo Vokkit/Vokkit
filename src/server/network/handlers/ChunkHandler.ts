@@ -16,6 +16,7 @@ export class ChunkHandler extends SocketHandler {
     const player = Vokkit.getServer().getPlayerById(socket.id)
     if (!player) {
       // Todo: check and ban ip
+      socket.disconnect()
       return
     }
     const world = Vokkit.getServer().getWorld(data.worldName)
