@@ -1,13 +1,13 @@
 import { WorldReader } from './format/WorldFormat'
 import { World } from './World'
-
-import fs from 'fs'
-import path from 'path'
 import { SimpleWorldReader, SimpleWorldFormatChecker, SimpleWorldWriter } from './format/SimpleWorldFormat'
 import { InvalidWorldError } from './error/InvalidWorldError'
 import { Vokkit } from '../Vokkit'
 import { InvalidWorldFormatError } from './error/InvalidWorldFormatError'
 import { Logger } from '../utils/Logger'
+
+import fs from 'fs'
+import path from 'path'
 
 export class WorldLoader {
   static worldDirectory = path.resolve('worlds')
