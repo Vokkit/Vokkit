@@ -1,5 +1,6 @@
 import { World } from '../world/World'
 import { Vokkit } from '../Vokkit'
+import { Position } from './Position'
 
 export class LocationObject {
   world: string
@@ -37,6 +38,14 @@ export class Location {
     return this.z
   }
 
+  getPosition (): Position {
+    return {
+      x: this.x,
+      y: this.y,
+      z: this.z
+    }
+  }
+
   setWorld (world: World) {
     this.world = world
   }
@@ -57,6 +66,12 @@ export class Location {
     this.x = x
     this.y = y
     this.z = z
+  }
+
+  setPosition (position: Position) {
+    this.x = position.x
+    this.y = position.y
+    this.z = position.z
   }
 
   clone () {

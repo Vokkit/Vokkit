@@ -1,10 +1,10 @@
 import { SocketHandler } from './SocketHandler'
 import { Vokkit } from '../../Vokkit'
-import { ChunkPosition } from '../../world/Chunk'
+import { ChunkPosition, ChunkPositionObject } from '../../utils/ChunkPosition'
 
 export interface ChunkData {
   worldName: string,
-  position: ChunkPosition
+  position: ChunkPositionObject
 }
 
 export class ChunkHandler extends SocketHandler {
@@ -28,7 +28,7 @@ export class ChunkHandler extends SocketHandler {
       socket.emit('chunk', { success: false, reason: 'invalid_chunk_request' })
       return
     }
-    const chunk = world.getChunk(data.position)
+    const chunk = world.getChunk(ChunkPosition.fromObject(data.position))
     socket.emit('chunk', { success: true, chunk: chunk.toJSON(), worldName: data.worldName })
   }
 }

@@ -39,11 +39,7 @@ export class Location {
   }
 
   getPosition (): Position {
-    return {
-      x: this.x,
-      y: this.y,
-      z: this.z
-    }
+    return new Position(this.x, this.y, this.z)
   }
 
   setWorld (world: World) {
@@ -69,9 +65,9 @@ export class Location {
   }
 
   setPosition (position: Position) {
-    this.x = position.x
-    this.y = position.y
-    this.z = position.z
+    this.x = position.getX()
+    this.y = position.getY()
+    this.z = position.getZ()
   }
 
   clone () {

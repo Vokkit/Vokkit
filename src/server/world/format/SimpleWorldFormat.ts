@@ -1,7 +1,9 @@
-import { Block, World } from '../World'
+import { World } from '../World'
 import { WorldReader, WorldWriter, WorldFormatChecker } from './WorldFormat'
-import { Chunk, ChunkPosition } from '../Chunk'
+import { Chunk } from '../Chunk'
 import { Position } from '../../utils/Position'
+import { ChunkPosition } from '../../utils/ChunkPosition'
+import { Block } from '../../block/Block'
 
 import fs from 'fs'
 import path from 'path'
@@ -13,17 +15,11 @@ export class SimpleWorldReader extends WorldReader {
     let index = 0
     while (true) {
       const chunkSize = buffer.readUInt32LE(index) * 6
-      const chunkPosition: ChunkPosition = {
-        x: buffer.readInt32LE(index + 4) * 16,
-        z: buffer.readInt32LE(index + 8) * 16
-      }
+      const chunkPosition = new ChunkPosition(buffer.readInt32LE(index + 4) * 16, buffer.readInt32LE(index + 8) * 16)
       const chunk = new Chunk(chunkPosition)
       for (let i = 0; i < chunkSize; i += 6) {
         const xz = buffer.readUInt8(index + i + 12)
-        chunk.setBlock({
-          position: { x: xz >> 4, y: buffer.readUInt8(index + i + 13), z: xz % 16 },
-          id: buffer.readUInt32LE(index + i + 14)
-        }, false)
+        chunk.setBlock(new Position(xz >> 4, buffer.readUInt8(index + i + 13), xz % 16), new Block(buffer.readUInt32LE(index + i + 14)), false)
       }
       chunks.push(chunk)
       index += chunkSize + 12
@@ -66,8 +62,8 @@ export class SimpleWorldWriter extends WorldWriter {
     chunks.forEach((chunk) => {
       const chunkSize = chunk.getBlockAmount()
       buffer.writeUInt32LE(index, chunkSize)
-      buffer.writeInt32LE(index + 4, chunk.getPosition().x / 16)
-      buffer.writeInt32LE(index + 8, chunk.getPosition().z / 16)
+      buffer.writeInt32LE(index + 4, chunk.getPosition().getX() / 16)
+      buffer.writeInt32LE(index + 8, chunk.getPosition().getZ() / 16)
       const blockData = chunk.getBlockData()
       for (let i = 0; i < blockData.length; i += 6) {
         const xz = i >> 8

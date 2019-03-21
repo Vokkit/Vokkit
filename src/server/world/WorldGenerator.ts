@@ -1,4 +1,6 @@
 import { World } from './World'
+import { Block } from '../block/Block'
+import { Position } from '../utils/Position'
 
 export class WorldGenerator {
   width: number
@@ -21,11 +23,11 @@ export class WorldGenerator {
         for (let z = 0; z < this.height; z++) {
           let y = Math.floor(this.noise2d(seed * r1 + x, seed * r2 + z) + 50)
 
-          world.setBlock({ position: { x: x, y: y, z: z }, id: 2 })
-          world.setBlock({ position: { x: x, y: y - 1, z: z }, id: 3 })
-          world.setBlock({ position: { x: x, y: y - 2, z: z }, id: 1 })
-          world.setBlock({ position: { x: x, y: y - 3, z: z }, id: 1 })
-          world.setBlock({ position: { x: x, y: y - 4, z: z }, id: 1 })
+          world.setBlock(new Position(x, y, z), new Block(2))
+          world.setBlock(new Position(x, y - 1, z), new Block(3))
+          world.setBlock(new Position(x, y - 2, z), new Block(1))
+          world.setBlock(new Position(x, y - 3, z), new Block(1))
+          world.setBlock(new Position(x, y - 4, z), new Block(1))
         }
       }
 

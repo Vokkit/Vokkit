@@ -2,6 +2,7 @@ import { SocketHandler } from './SocketHandler'
 import { Vokkit } from '../../Vokkit'
 import { NetworkManager } from '../NetworkManager'
 import { LocationObject, Location } from '../../utils/Location'
+import { Block } from '../../block/Block'
 
 export interface BlockPlaceData {
   location: LocationObject
@@ -27,7 +28,7 @@ export class BlockHandler extends SocketHandler {
       // 공기가 아닌 부분에 설치했음
       return
     }
-    location.getWorld().setBlock({ position: location.getPosition(), id: data.id })
+    location.getWorld().setBlock(location.getPosition(), new Block(data.id))
     NetworkManager.getSocket().emit('set_block', data)
   }
 }
