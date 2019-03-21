@@ -1,4 +1,6 @@
 import { World } from '../world/World'
+import { Vokkit } from '../Vokkit'
+import { Position } from './Position'
 
 export class LocationObject {
   world: string
@@ -36,6 +38,14 @@ export class Location {
     return this.z
   }
 
+  getPosition (): Position {
+    return {
+      x: this.x,
+      y: this.y,
+      z: this.z
+    }
+  }
+
   setWorld (world: World) {
     this.world = world
   }
@@ -58,6 +68,12 @@ export class Location {
     this.z = z
   }
 
+  setPosition (position: Position) {
+    this.x = position.x
+    this.y = position.y
+    this.z = position.z
+  }
+
   clone () {
     return new Location(this.world, this.x, this.y, this.z)
   }
@@ -71,5 +87,9 @@ export class Location {
 
   toObject (): LocationObject {
     return { world: this.world.getName(), x: this.x, y: this.y, z: this.z }
+  }
+
+  static fromObject (object: LocationObject) {
+    return new Location(Vokkit.getServer().getWorld(object.world), object.x, object.y, object.z)
   }
 }

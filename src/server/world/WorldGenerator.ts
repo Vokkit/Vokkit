@@ -41,7 +41,8 @@ export class WorldGenerator {
 
   noise1d (seed: number) {
     let v = 0
-    for (let i = 0, j = 0.3; i < 4; i++, j *= 1.7) {
+    let j = 0.3
+    for (let i = 0; i < 4; i++, j *= 1.7) {
       v += this.n(seed + j, 0.18 * j, 6 / j)
     }
 
