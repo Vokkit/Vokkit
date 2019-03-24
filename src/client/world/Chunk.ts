@@ -1,10 +1,6 @@
 import { Position } from '../utils/Position'
 import { Block } from './World'
-
-export interface ChunkPosition {
-  x: number,
-  z: number
-}
+import { ChunkPosition } from '../utils/ChunkPosition'
 
 export class Chunk {
   private position: ChunkPosition
@@ -19,14 +15,14 @@ export class Chunk {
   }
 
   getBlock (position: Position, checkPosition = true) {
-    if (!checkPosition || this.isPosition(position)) {
-      return this.blockData.readUInt32LE((position.x * 4096 + position.z * 256 + position.y) * 6)
+    if (!checkPosition || position instanceof Position) {
+      return this.blockData.readUInt32LE((position.getX() * 4096 + position.getZ() * 256 + position.getY()) * 6)
     }
   }
 
   setBlock (newBlock: Block, checkPosition = true) {
-    if (!checkPosition || this.isPosition(newBlock.position)) {
-      this.blockData.writeUInt32LE((newBlock.position.x * 4096 + newBlock.position.z * 256 + newBlock.position.y) * 6, newBlock.id)
+    if (!checkPosition || newBlock.position instanceof Position) {
+      this.blockData.writeUInt32LE((newBlock.position.getX() * 4096 + newBlock.position.getZ() * 256 + newBlock.position.getY()) * 6, newBlock.id)
       this.dirty = true
     }
   }
@@ -47,17 +43,8 @@ export class Chunk {
     this.dirty = dirty
   }
 
-  private isPosition (position: any): position is Position {
-    if (typeof position.x === 'number' && typeof position.y === 'number' && typeof position.z === 'number') {
-      if (position.x >= 0 && position.x < 16 && position.y >= 0 && position.y < 256 && position.z >= 0 && position.z < 16) {
-        return true
-      }
-    }
-    return false
-  }
-
-  checkPosition (position: ChunkPosition) {
-    return position.x >= this.position.x && position.x < this.position.x + 16 && position.z >= this.position.z && position.z < this.position.z + 16
+  checkPosition (position: ChunkPosition | Position) {
+    return position.getX() >= this.position.getX() && position.getX() < this.position.getX()+ 16 && position.getZ() >= this.position.getZ() && position.getZ() < this.position.getZ() + 16
   }
 
   getBlockAmount () {
