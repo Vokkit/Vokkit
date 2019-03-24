@@ -44,7 +44,7 @@ export class Chunk {
   }
 
   checkPosition (position: ChunkPosition | Position) {
-    return position.getX() >= this.position.getX() && position.getX() < this.position.getX()+ 16 && position.getZ() >= this.position.getZ() && position.getZ() < this.position.getZ() + 16
+    return position.getX() >= this.position.getX() && position.getX() < this.position.getX() + 16 && position.getZ() >= this.position.getZ() && position.getZ() < this.position.getZ() + 16
   }
 
   getBlockAmount () {
