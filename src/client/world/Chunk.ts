@@ -9,6 +9,7 @@ export interface ChunkPosition {
 export class Chunk {
   private position: ChunkPosition
   private blockData: Buffer
+  private dirty = false
 
   static maxSize = 262144
 
@@ -26,6 +27,7 @@ export class Chunk {
   setBlock (newBlock: Block, checkPosition = true) {
     if (!checkPosition || this.isPosition(newBlock.position)) {
       this.blockData.writeUInt32LE((newBlock.position.x * 4096 + newBlock.position.z * 256 + newBlock.position.y) * 6, newBlock.id)
+      this.dirty = true
     }
   }
 
@@ -35,6 +37,14 @@ export class Chunk {
 
   getPosition () {
     return this.position
+  }
+
+  isDirty () {
+    return this.dirty
+  }
+
+  setDirty (dirty: boolean) {
+    this.dirty = dirty
   }
 
   private isPosition (position: any): position is Position {
