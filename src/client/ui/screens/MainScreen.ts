@@ -1,5 +1,6 @@
 import { Vokkit } from '../../Vokkit'
 import { Screen } from '../Screen'
+import { MainRenderer } from '../../render/MainRenderer'
 
 export class LoginScreen extends Screen {
   constructor () {
@@ -9,6 +10,8 @@ export class LoginScreen extends Screen {
   }
 
   init () {
-    // TODO
+    MainRenderer.init()
+
+    this.dom = MainRenderer.getRenderer().domElement
   }
 }
