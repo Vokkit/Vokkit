@@ -6,5 +6,8 @@
     "strict": false,
     "esModuleInterop": true,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": [
+    "src/client/assemblyscript/*"
+  ]
 }
