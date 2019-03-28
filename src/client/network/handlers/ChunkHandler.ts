@@ -1,6 +1,7 @@
 import { SocketHandler } from './SocketHandler'
-import { Chunk, ChunkPosition } from '../../world/Chunk'
-import { Vokkit } from '../../Vokkit';
+import { Chunk } from '../../world/Chunk'
+import { Vokkit } from '../../Vokkit'
+import { ChunkPosition } from '../../utils/ChunkPosition'
 
 export interface ChunkJSONData {
   position: ChunkPosition
