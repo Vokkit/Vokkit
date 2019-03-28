@@ -3,6 +3,7 @@ import { UserLanguageLoader } from './language/UserLanguageLoader'
 import { PluginManager } from '../server/plugin/PluginManager'
 import { NetworkManager } from './network/NetworkManager'
 import { World } from './world/World'
+import { ScreenManager } from './ui/ScreenManager'
 
 export class Client {
   private language: string
@@ -16,6 +17,9 @@ export class Client {
     PluginManager.loadPlugins()
 
     NetworkManager.connectServer()
+
+    ScreenManager.init()
+    ScreenManager.addScreen('LoginScreen')
   }
 
   getLanguageFormatter () {

@@ -13,8 +13,8 @@ export class ScreenChooser {
     this.screenProvider = screenProvider
   }
 
-  setScreen (screen) {
-    screen = this.getScreen(screen)
+  setScreen (screenName: string) {
+    const screen = this.getScreen(screenName)
     screen.show()
 
     if (this.now !== null && this.now.getType() !== 'base') {
@@ -27,7 +27,7 @@ export class ScreenChooser {
     // todo Vokkit.getClient().getInputManager().setInput()
   }
 
-  getScreen (name) {
+  getScreen (name: string) {
     for (let screen of this.screenProvider.getAllScreens()) {
       if (screen.getName() === name) {
         return screen

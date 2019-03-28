@@ -23,31 +23,31 @@ class InputManager {
   }
 
   setInput () {
-    function onMouseMove (e) {
+    function onMouseMove (e: MouseEvent) {
       ScreenManager.getNowScreen().getInputBinder().mouseMoveListener(e)
     }
 
-    function onMouseDown (e) {
+    function onMouseDown (e: MouseEvent) {
       ScreenManager.getNowScreen().getInputBinder().mouseDownListener(e)
     }
 
-    function onMouseUp (e) {
+    function onMouseUp (e: MouseEvent) {
       ScreenManager.getNowScreen().getInputBinder().mouseUpListener(e)
     }
 
-    function onMouseWheel (e) {
+    function onMouseWheel (e: MouseEvent) {
       ScreenManager.getNowScreen().getInputBinder().mouseWheelListener(e)
     }
 
-    function onKeyDown (e) {
+    function onKeyDown (e: KeyboardEvent) {
       ScreenManager.getNowScreen().getInputBinder().keyDownListener(e)
     }
 
-    function onKeyUp (e) {
+    function onKeyUp (e: KeyboardEvent) {
       ScreenManager.getNowScreen().getInputBinder().keyUpListener(e)
     }
 
-    function onPointerLockChange (event) {
+    function onPointerLockChange (event: PointerEvent) {
       if (document.pointerLockElement !== null && document.mozPointerLockElement !== null) {
         document.onmousemove = onMouseMove
         document.onmousedown = onMouseDown
