@@ -1,6 +1,6 @@
 import { Position } from '../utils/Position'
-import { Block } from './World'
 import { ChunkPosition } from '../utils/ChunkPosition'
+import { Block } from '../block/Block'
 
 export class Chunk {
   private position: ChunkPosition
@@ -20,9 +20,9 @@ export class Chunk {
     }
   }
 
-  setBlock (newBlock: Block, checkPosition = true) {
-    if (!checkPosition || newBlock.position instanceof Position) {
-      this.blockData.writeUInt32LE((newBlock.position.getX() * 4096 + newBlock.position.getZ() * 256 + newBlock.position.getY()) * 6, newBlock.id)
+  setBlock (position: Position, newBlock: Block, checkPosition = true) {
+    if (!checkPosition || position instanceof Position) {
+      this.blockData.writeUInt32LE((position.getX() * 4096 + position.getZ() * 256 + position.getY()) * 6, newBlock.getId())
       this.dirty = true
     }
   }

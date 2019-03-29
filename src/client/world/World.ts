@@ -1,11 +1,7 @@
 import { Chunk } from './Chunk'
 import { Position } from '../utils/Position'
 import { ChunkPosition } from '../utils/ChunkPosition'
-
-export interface Block {
-  position: Position
-  id: number
-}
+import { Block } from '../block/Block'
 
 export class World {
   private name: string
@@ -20,10 +16,10 @@ export class World {
     return this.name
   }
 
-  setBlock (newBlock: Block) {
+  setBlock (position: Position, newBlock: Block) {
     for (const chunk of this.chunks) {
-      if (chunk.checkPosition(newBlock.position)) {
-        chunk.setBlock(newBlock)
+      if (chunk.checkPosition(position)) {
+        chunk.setBlock(position, newBlock)
       }
     }
   }
