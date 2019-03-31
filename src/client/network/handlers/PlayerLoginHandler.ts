@@ -1,5 +1,6 @@
 import { SocketHandler } from './SocketHandler'
 import { Vokkit } from '../../Vokkit'
+import { ScreenManager } from '../../ui/ScreenManager'
 
 export interface PlayerLoginRequestData {
   name: string
@@ -22,6 +23,7 @@ export class PlayerLoginHandler extends SocketHandler {
     this.socket.emit('login', loginData, (res: PlayerLoginResponseData) => {
       if (res.success) {
         // todo
+        ScreenManager.addScreen('MainScreen')
       } else {
         console.error(Vokkit.getClient().getLanguageFormatter().format(res.reason))
       }
