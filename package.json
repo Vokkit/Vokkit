@@ -36,6 +36,7 @@
   "dependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
+    "assemblyscript": "github:AssemblyScript/assemblyscript",
     "assemblyscript-typescript-loader": "^1.4.1",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^5.0.0",
