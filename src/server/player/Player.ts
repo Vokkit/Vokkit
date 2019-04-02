@@ -2,6 +2,7 @@ import { Location, LocationObject } from '../utils/Location'
 import { Entity } from '../entity/Entity'
 
 export interface PlayerObject {
+  id: string,
   name: string,
   location: LocationObject
 }
@@ -24,8 +25,13 @@ export class Player extends Entity {
     return this.socket
   }
 
+  getId () {
+    return this.socket.id
+  }
+
   toObject (): PlayerObject {
     return {
+      id: this.socket.id,
       name: this.name,
       location: this.location.toObject()
     }

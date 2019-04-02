@@ -1,5 +1,11 @@
 import { ChunkPosition } from './ChunkPosition'
 
+export class PositionObject {
+  x: number
+  y: number
+  z: number
+}
+
 export class Position {
   private x: number
   private y: number
@@ -43,5 +49,17 @@ export class Position {
 
   toChunkPosition () {
     return new ChunkPosition(this.x, this.z)
+  }
+
+  toObject (): PositionObject {
+    return {
+      x: this.x,
+      y: this.y,
+      z: this.z
+    }
+  }
+
+  static fromObject (object: PositionObject) {
+    return new Position(object.x, object.y, object.z)
   }
 }
