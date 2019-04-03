@@ -12,7 +12,7 @@ export interface PlayerMoveData {
   position: PositionObject
 }
 
-export class BlockHandler extends SocketHandler {
+export class MoveHandler extends SocketHandler {
   onConnection (socket: SocketIO.Socket) {
     socket.on('move', (data: MoveData) => this.onMove(socket, data))
   }

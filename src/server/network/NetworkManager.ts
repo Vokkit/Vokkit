@@ -2,9 +2,11 @@ import { SocketHandler } from './handlers/SocketHandler'
 import { Logger } from '../utils/Logger'
 import { Vokkit } from '../Vokkit'
 
-import { PlayerHandler } from './handlers/PlayerHandler'
+import { BlockHandler } from './handlers/BlockHandler'
 import { ChatHandler } from './handlers/ChatHandler'
 import { ChunkHandler } from './handlers/ChunkHandler'
+import { MoveHandler } from './handlers/MoveHandler'
+import { PlayerHandler } from './handlers/PlayerHandler'
 
 import express from 'express'
 import http from 'http'
@@ -23,9 +25,11 @@ export class NetworkManager {
 
     // TODO: add default handlers
     this.handlers = []
-    this.addSocketHandler(new PlayerHandler())
+    this.addSocketHandler(new BlockHandler())
     this.addSocketHandler(new ChatHandler())
     this.addSocketHandler(new ChunkHandler())
+    this.addSocketHandler(new MoveHandler())
+    this.addSocketHandler(new PlayerHandler())
 
     this.io.on('connection', (socket) => this.onConnection(socket))
 
