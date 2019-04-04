@@ -1,6 +1,6 @@
 import { LanguageFormatter } from './language/LanguageFormatter'
-import { ServerProperties } from './property/ServerProperties'
-import { ServerPropertyLoader } from './property/ServerPropertyLoader'
+import { ServerProperties } from './utils/ServerProperties'
+import { ServerPropertyLoader } from './utils/ServerPropertyLoader'
 import { PluginManager } from './plugin/PluginManager'
 import { ClientBuilder } from './build/ClientBuilder'
 import { Logger } from './utils/Logger'
