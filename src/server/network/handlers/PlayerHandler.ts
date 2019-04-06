@@ -8,6 +8,7 @@ import { NetworkManager } from '../NetworkManager'
 import { Server } from '../../Server'
 import { PluginManager } from '../../plugin/PluginManager'
 import { PlayerJoinEvent } from '../../event/player/PlayerJoinEvent'
+import { Inventory } from '../../inventory/Inventory'
 
 export interface PlayerLoginData {
   name: string
@@ -39,7 +40,7 @@ export class PlayerHandler extends SocketHandler {
       return
     }
 
-    const player = new Player(socket, data.name, new Location(Vokkit.getServer().getWorlds()[0])) // todo: spawn location
+    const player = new Player(socket, data.name, new Location(Vokkit.getServer().getWorlds()[0]), new Inventory(45)) // todo: spawn location
     Vokkit.getServer().getPlayers().push(player)
 
     Logger.info(Vokkit.getServer().getLanguageFormatter().format('player_join_message', { name: player.getName() }))
