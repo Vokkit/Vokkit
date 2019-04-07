@@ -1,17 +1,18 @@
 import { Location } from '../utils/Location'
+import { EntityData } from './EntityData'
 
 export class Entity {
-  protected location: Location
+  protected data: EntityData
 
-  constructor (location: Location) {
-    this.location = location
+  constructor (data: EntityData) {
+    this.data = data
   }
 
   getLocation () {
-    return this.location.clone()
+    return this.data.location.clone()
   }
 
   teleport (location: Location) {
-    this.location.copy(location)
+    this.data.location.copy(location)
   }
 }

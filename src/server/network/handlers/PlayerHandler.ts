@@ -40,7 +40,12 @@ export class PlayerHandler extends SocketHandler {
       return
     }
 
-    const player = new Player(socket, data.name, new Location(Vokkit.getServer().getWorlds()[0]), new Inventory(45)) // todo: spawn location
+    const player = new Player({
+      name: data.name,
+      location: new Location(Vokkit.getServer().getWorlds()[0]),
+      inventory: new Inventory(45),
+      socket: socket
+    }) // todo: spawn location
     Vokkit.getServer().getPlayers().push(player)
 
     Logger.info(Vokkit.getServer().getLanguageFormatter().format('player_join_message', { name: player.getName() }))

@@ -1,6 +1,6 @@
-import { Location, LocationObject } from '../utils/Location'
+import { LocationObject } from '../utils/Location'
 import { Entity } from '../entity/Entity'
-import { Inventory } from '../inventory/Inventory'
+import { PlayerData } from './PlayerData'
 
 export interface PlayerObject {
   id: string,
@@ -9,38 +9,33 @@ export interface PlayerObject {
 }
 
 export class Player extends Entity {
-  protected socket: SocketIO.Socket
-  protected name: string
-  protected inventory: Inventory
+  protected data: PlayerData
 
-  constructor (socket: SocketIO.Socket, name: string, location: Location, inventory: Inventory) {
-    super(location)
-    this.socket = socket
-    this.name = name
-    this.inventory = inventory
+  constructor (data: PlayerData) {
+    super(data)
   }
 
   getName () {
-    return this.name
+    return this.data.name
   }
 
   getSocket () {
-    return this.socket
+    return this.data.socket
   }
 
   getId () {
-    return this.socket.id
+    return this.data.socket.id
   }
 
   getInventory () {
-    return this.inventory
+    return this.data.inventory
   }
 
   toObject (): PlayerObject {
     return {
-      id: this.socket.id,
-      name: this.name,
-      location: this.location.toObject()
+      id: this.data.socket.id,
+      name: this.data.name,
+      location: this.data.location.toObject()
     }
   }
 }
