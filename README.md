@@ -8,6 +8,8 @@ voxel server launcher accessed via a web browser
 
 use `npm run build` or `npm run watch` (webpack build)
 
+클라이언트는 서버를 실행할 때마다 자동으로 빌드됩니다.
+
 ## Plugin
 플러그인은 `src` 폴더가 아닌 `build` 폴더를 `require` 해야 합니다. 추후에 개발 환경을 제작할 예정입니다.
 
