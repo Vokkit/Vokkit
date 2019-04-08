@@ -4,11 +4,13 @@ import { PluginManager } from '../server/plugin/PluginManager'
 import { NetworkManager } from './network/NetworkManager'
 import { World } from './world/World'
 import { ScreenManager } from './ui/ScreenManager'
+import { Player } from './player/Player'
 
 export class Client {
   private language: string
   private languageFormatter: LanguageFormatter
   private worlds: World[]
+  private players: Player[]
 
   init () {
     this.language = UserLanguageLoader.load()
@@ -40,5 +42,25 @@ export class Client {
 
   addWorld (world: World) {
     if (!this.worlds.includes(world)) this.worlds.push(world)
+  }
+
+  getPlayers () {
+    return this.players
+  }
+
+  getPlayer (name: string) {
+    for (const player of this.players) {
+      if (player.getName() === name) return player
+    }
+  }
+
+  getPlayerById (id: string) {
+    for (const player of this.players) {
+      if (player.getId() === id) return player
+    }
+  }
+
+  addPlayer (player: Player) {
+    this.players.push(player)
   }
 }

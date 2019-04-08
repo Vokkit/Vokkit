@@ -3,6 +3,7 @@ import { SocketHandler } from './handlers/SocketHandler'
 import io from 'socket.io-client'
 import { Vokkit } from '../Vokkit'
 import { PlayerLoginHandler } from './handlers/PlayerLoginHandler'
+import { PlayerJoinHandler } from './handlers/PlayerJoinHandler'
 import { ChunkHandler } from './handlers/ChunkHandler'
 import { WorldHandler } from './handlers/WorldHandler'
 
@@ -17,6 +18,7 @@ export class NetworkManager {
     // TODO: add default handlers
     this.handlers = []
     this.addSocketHandler(new PlayerLoginHandler())
+    this.addSocketHandler(new PlayerJoinHandler())
     this.addSocketHandler(new ChunkHandler())
     this.addSocketHandler(new WorldHandler())
   }
