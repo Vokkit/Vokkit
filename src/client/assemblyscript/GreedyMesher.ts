@@ -26,14 +26,14 @@ export function optimize (data: Uint32Array) {
         const front = getBlock(x + 1, y, z)
         const back = getBlock(x + 1, y, z)
         if (x === 15 || (front !== 0 && front !== now)) { // 안보이는 면 지움.
-          blockDataFront[x * 4096 + z * 256 + y] = 0
+          blockDataFront[z * 256 + y] = 0
         } else {
-          blockDataFront[x * 4096 + z * 256 + y] = now
+          blockDataFront[z * 256 + y] = now
         }
         if (x === 0 || (back !== 0 && back !== now)) { // 안보이는 면 지움.
-          blockDataBack[x * 4096 + z * 256 + y] = 0
+          blockDataBack[z * 256 + y] = 0
         } else {
-          blockDataBack[x * 4096 + z * 256 + y] = now
+          blockDataBack[z * 256 + y] = now
         }
       }
     }
@@ -52,14 +52,14 @@ export function optimize (data: Uint32Array) {
         const front = getBlock(x + 1, y, z)
         const back = getBlock(x + 1, y, z)
         if (x === 15 || (front !== 0 && front !== now)) { // 안보이는 면 지움.
-          blockDataFront[x * 4096 + z * 256 + y] = 0
+          blockDataFront[x * 16 + z] = 0
         } else {
-          blockDataFront[x * 4096 + z * 256 + y] = now
+          blockDataFront[x * 16 + z] = now
         }
         if (x === 0 || (back !== 0 && back !== now)) { // 안보이는 면 지움.
-          blockDataBack[x * 4096 + z * 256 + y] = 0
+          blockDataBack[x * 16 + z] = 0
         } else {
-          blockDataBack[x * 4096 + z * 256 + y] = now
+          blockDataBack[x * 16 + z] = now
         }
       }
     }
@@ -78,14 +78,14 @@ export function optimize (data: Uint32Array) {
         const front = getBlock(x + 1, y, z)
         const back = getBlock(x + 1, y, z)
         if (x === 15 || (front !== 0 && front !== now)) { // 안보이는 면 지움.
-          blockDataFront[x * 4096 + z * 256 + y] = 0
+          blockDataFront[x * 256 + y] = 0
         } else {
-          blockDataFront[x * 4096 + z * 256 + y] = now
+          blockDataFront[x * 256 + y] = now
         }
         if (x === 0 || (back !== 0 && back !== now)) { // 안보이는 면 지움.
-          blockDataBack[x * 4096 + z * 256 + y] = 0
+          blockDataBack[x * 256 + y] = 0
         } else {
-          blockDataBack[x * 4096 + z * 256 + y] = now
+          blockDataBack[x * 256 + y] = now
         }
       }
     }
