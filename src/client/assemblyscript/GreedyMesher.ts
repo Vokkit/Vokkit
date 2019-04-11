@@ -8,8 +8,50 @@ function getBlock (x: u8, y: u8, z: u8): u32 {
   return chunk[x * 4096 + z * 256 + y]
 }
 
-function blockToFace (blockData: Uint32Array) {
-
+function blockToFace (blockData: Uint32Array, xSize: u8, ySize: u8) {
+  let startX: u8 = 0
+  let startY: u8 = 0
+  let searchY: u8 = 0
+  let searchX: u8 = 0
+  let id: u8 = -1
+  let searchingX = true
+  let result = new Uint32Array(blockData.length * 4)
+  let resultIndex = 0
+  while (true) {
+    if (id === -1) {
+      if (blockData[searchY * xSize + searchX] !== 0) {
+        id = blockData[searchY * xSize + searchX]
+      }
+      continue
+    }
+    if (searchingX) {
+      searchX++
+      if (id !== blockData[searchY * xSize + searchX] || searchX >= xSize) {
+        searchX--
+        searchingX = false
+      }
+    } else {
+      searchY++
+      let found = false
+      for (let x = startX; x <= searchX; x++) {
+        if (id !== blockData[searchY * xSize + x]) {
+          found = true
+          break
+        }
+      }
+      if (found) {
+        searchY--
+        result[resultIndex] = startX
+        result[resultIndex + 1] = startY
+        result[resultIndex + 2] = searchX
+        result[resultIndex + 3] = searchY
+        resultIndex += 4
+        id = -1
+        startX = searchX
+        searchY = startY
+      }
+    }
+  }
 }
 
 export function optimize (data: Uint32Array) {
@@ -38,8 +80,8 @@ export function optimize (data: Uint32Array) {
       }
     }
     // 한 층 한 층 나눠서 돌리고 저장
-    const faceDataFront = blockToFace(blockDataFront)
-    const faceDataBack = blockToFace(blockDataBack)
+    const faceDataFront = blockToFace(blockDataFront, 256, 16)
+    const faceDataBack = blockToFace(blockDataBack, 256, 16)
     // TODO: blockToFace 함수 작성, FaceToData 함수 작성 및 적용
   }
   // y축방향 Face 최적화
@@ -64,8 +106,8 @@ export function optimize (data: Uint32Array) {
       }
     }
     // 한 층 한 층 나눠서 돌리고 저장
-    const faceDataFront = blockToFace(blockDataFront)
-    const faceDataBack = blockToFace(blockDataBack)
+    const faceDataFront = blockToFace(blockDataFront, 16, 16)
+    const faceDataBack = blockToFace(blockDataBack, 16, 16)
     // TODO: blockToFace 함수 작성, FaceToData 함수 작성 및 적용
   }
   // z축방향 Face 최적화
@@ -90,8 +132,8 @@ export function optimize (data: Uint32Array) {
       }
     }
     // 한 층 한 층 나눠서 돌리고 저장
-    const faceDataFront = blockToFace(blockDataFront)
-    const faceDataBack = blockToFace(blockDataBack)
+    const faceDataFront = blockToFace(blockDataFront, 256, 16)
+    const faceDataBack = blockToFace(blockDataBack, 256, 16)
     // TODO: blockToFace 함수 작성, FaceToData 함수 작성 및 적용
   }
 }
