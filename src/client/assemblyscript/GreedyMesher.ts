@@ -47,8 +47,20 @@ function blockToFace (blockData: Uint32Array, xSize: u8, ySize: u8) {
         result[resultIndex + 3] = searchY
         resultIndex += 4
         id = -1
-        startX = searchX
-        searchY = startY
+        let newX = startX
+        let newY = startY
+        for ( ; newY < ySize; newY++) {
+          for ( ; newX < xSize; newX++) {
+            for (let i = 0; i < result.length; i += 4) {
+              if ((result[i] > newX || result[i + 2] < newX) && (result[i + 1] > newY || result[i + 3] < newY)) {
+                startX = newX
+                searchX = newX
+                startY = newY
+                searchY = newY
+              }
+            }
+          }
+        }
       }
     }
   }
