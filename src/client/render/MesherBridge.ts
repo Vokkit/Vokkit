@@ -4,8 +4,8 @@ interface MesherModule extends loader.ASUtil {
   optimize: (ptr: number) => void
   getVertices: () => Uint32Array
   getFaces: () => Uint32Array
-  memory: WebAssembly.Memory
-  table: WebAssembly.Table
+  memory: any
+  table: any
 }
 
 export class MesherBridge {
