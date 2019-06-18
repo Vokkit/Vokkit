@@ -11,6 +11,6 @@
     "src/client/assemblyscript/*"
   ],
   "files": [
-    "./types/WebAseembly.d.ts"
+    "./types/WebAssembly.d.ts"
   ]
 }
