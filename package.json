@@ -37,7 +37,6 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "assemblyscript": "github:AssemblyScript/assemblyscript",
-    "assemblyscript-typescript-loader": "^1.4.1",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^5.0.3",
     "socket.io": "^2.2.0",

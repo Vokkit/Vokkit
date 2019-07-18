@@ -24,14 +24,6 @@ const config: webpack.Configuration = {
           }
         },
         exclude: /node_modules/
-      },
-      {
-        test: /\.asc?$/,
-        loader: 'assemblyscript-typescript-loader',
-        options: {
-          limit: 1000,
-          name: `[name].[hash:8].wasm`
-        }
       }
     ]
   },
