@@ -1,4 +1,5 @@
 import { World } from '../world/World'
+import { MesherBridge } from './MesherBridge'
 
 import THREE from 'three'
 
@@ -27,8 +28,12 @@ export class MainRenderer {
   static render () {
     const chunks = this.world.getChunks()
     for (let i = 0; i < chunks.length; i++) {
-      // todo
+      if (chunks[i].isDirty()) {
+        this.scene.remove(chunks[i].getMesh())
+        this.scene.add(chunks[i].toMesh())
+      }
     }
+    this.renderer.setAnimationLoop(this.render)
   }
 
   static getScene () {
@@ -65,7 +70,7 @@ export class MainRenderer {
     this.clearScene()
     const chunks = this.world.getChunks()
     for (let i = 0; i < chunks.length; i++) {
-      // todo
+      chunks[i].setDirty(true)
     }
   }
 }
