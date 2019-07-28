@@ -23,6 +23,10 @@ export class MainRenderer {
       this.camera.updateProjectionMatrix()
       this.renderer.setSize(window.innerWidth, window.innerHeight)
     })
+    
+    this.renderer.setAnimationLoop(() => {
+      this.render()
+    })
   }
 
   static render () {
@@ -33,7 +37,7 @@ export class MainRenderer {
         this.scene.add(chunks[i].toMesh())
       }
     }
-    this.renderer.setAnimationLoop(this.render)
+    this.renderer.render(this.scene, this.camera)
   }
 
   static getScene () {
