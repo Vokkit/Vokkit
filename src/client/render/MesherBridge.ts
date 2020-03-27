@@ -26,11 +26,12 @@ export class MesherBridge {
   }
 
   static optimize (chunk: Uint32Array) {
-    const ptr = this.module.newArray(chunk)
-    this.module.optimize(ptr)
+    // const ptr = this.module.__retain(this.module.__allocArray(this.module.UINT32Array, chunk))
+    // this.module.optimize(ptr)
     const vertices = this.module.getVertices()
     const faces = this.module.getFaces()
     this.module.memory.reset()
+    // this.module.__release(ptr)
     return { vertices, faces }
   }
 
