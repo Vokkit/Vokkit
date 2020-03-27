@@ -40,7 +40,7 @@ export class Server {
     Logger.info(this.languageFormatter.format('server_opening'))
     NetworkManager.openServer(this.properties.port)
     Logger.info(this.languageFormatter.format('server_opened', { port: this.properties.port.toString() }))
-    Logger.setTitle(this.getLanguageFormatter().format('server_title', { version: Server.version, onlineUsers: '0' }))
+    Logger.setTitle(this.languageFormatter.format('server_title', { version: Server.version, onlineUsers: '0' }))
 
     this.players = []
   }
