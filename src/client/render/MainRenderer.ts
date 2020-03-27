@@ -23,7 +23,7 @@ export class MainRenderer {
       this.camera.updateProjectionMatrix()
       this.renderer.setSize(window.innerWidth, window.innerHeight)
     })
-    
+
     this.renderer.setAnimationLoop(() => {
       this.render()
     })

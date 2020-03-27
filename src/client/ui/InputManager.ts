@@ -3,7 +3,7 @@ import { ScreenManager } from './ScreenManager'
 
 declare global {
   interface Document {
-    exitPointerLock: () => any
+    exitPointerLock: () => void
     pointerLockElement: HTMLElement
     mozPointerLockElement: HTMLElement
   }
