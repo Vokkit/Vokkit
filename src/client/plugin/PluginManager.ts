@@ -2,7 +2,8 @@ import { PluginBase } from './PluginBase'
 
 export class PluginManager {
   static pluginList = {
-    // {Replacement}
+    // {Start}
+    // {End}
   }
   static eventListeners: { eventName: string, listener: (event: Event) => any, eventPriority: number }[]
 

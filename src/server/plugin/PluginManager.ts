@@ -8,8 +8,7 @@ import path from 'path'
 import fs from 'fs'
 
 export class PluginManager {
-  static clientPluginManagerPath = path.resolve('/src/client/plugin/PluginManager.ts')
-  static clientPluginManagerSourcePath = path.resolve('./client/PluginManager.txt')
+  static clientPluginManagerPath = path.resolve('src/client/plugin/PluginManager.ts')
   static pluginPath = path.resolve('plugins')
   static pluginExtension = 'zip'
   static pluginList: PluginManifest[]
@@ -53,17 +52,16 @@ export class PluginManager {
   }
 
   private static applyClientPlugin (plugin: PluginManifest) {
-    // TODO: Client의 PluginManager 코드 수정
     return `${plugin.name}: require('${plugin.path}')`
   }
 
   static applyClientPlugins () {
-    const clientPluginManagerSource = fs.readFileSync(this.clientPluginManagerSourcePath).toString()
+    const clientPluginManagerSource = fs.readFileSync(this.clientPluginManagerPath).toString()
     const replaceSource: string[] = []
     this.pluginList.forEach((plugin) => {
       replaceSource.push(this.applyClientPlugin(plugin))
     })
-    fs.writeFileSync(this.clientPluginManagerPath, clientPluginManagerSource.replace('// {Replacement}', replaceSource.join(',\n')))
+    fs.writeFileSync(this.clientPluginManagerPath, clientPluginManagerSource.replace(/\/\/ {start}((.|\n)*)\/\/ {end}/g, `// {start}\n${replaceSource.join(',\n')}\n// {end}`))
   }
 
   static isPluginManifest (manifest: any): manifest is PluginManifest {
