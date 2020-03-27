@@ -1,6 +1,6 @@
 import { LanguageFormatter } from './language/LanguageFormatter'
 import { UserLanguageLoader } from './language/UserLanguageLoader'
-import { PluginManager } from '../server/plugin/PluginManager'
+import { PluginManager } from './plugin/PluginManager'
 import { NetworkManager } from './network/NetworkManager'
 import { World } from './world/World'
 import { ScreenManager } from './ui/ScreenManager'
