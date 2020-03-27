@@ -9,8 +9,5 @@
   },
   "exclude": [
     "src/client/assemblyscript/*"
-  ],
-  "files": [
-    "./types/WebAssembly.d.ts"
   ]
 }
