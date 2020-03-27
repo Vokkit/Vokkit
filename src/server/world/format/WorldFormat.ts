@@ -22,6 +22,7 @@ export class WorldFormatChecker {
 
 export class WorldWriter {
   static write (worldDirectory: string, worldData: World): void {
+    if (!fs.existsSync(worldDirectory)) fs.mkdirSync(worldDirectory)
     return
   }
 }

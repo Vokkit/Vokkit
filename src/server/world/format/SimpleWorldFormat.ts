@@ -52,6 +52,8 @@ export class SimpleWorldFormatChecker extends WorldFormatChecker {
 
 export class SimpleWorldWriter extends WorldWriter {
   static write (worldDirectory: string, world: World) {
+    super.write(worldDirectory, world)
+
     const chunks = world.getChunks()
 
     let size = 0
