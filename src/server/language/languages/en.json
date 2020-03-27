@@ -7,6 +7,7 @@
   "server_world_loaded": "Successfully loaded {number} world(s).",
   "server_opening": "Opening Server...",
   "server_opened": "Done!",
+  "server_title": "Vokkit {version} ({onlineUsers} user(s))",
 
   "world_loading_started": "Loading world {worldPath}...",
   "world_loaded": "Successfully loaded world {worldPath}.",
@@ -16,5 +17,8 @@
 
   "network_handler_error": "There was an error while handling network on handler {name}.\n{error}",
 
-  "chat_format": "<{sender}> {message}"
+  "chat_format": "<{sender}> {message}",
+
+  "player_join_message": "{name} joined the game.",
+  "player_quit_message": "{name} left the game."
 }

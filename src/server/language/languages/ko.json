@@ -20,5 +20,5 @@
   "chat_format": "<{sender}> {message}",
 
   "player_join_message": "{name} 님이 게임에 참여하셨습니다.",
-  "player_quit_message": "{name} 님이 퇴장하셨습나다."
+  "player_quit_message": "{name} 님이 퇴장하셨습니다."
 }
