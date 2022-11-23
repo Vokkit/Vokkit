@@ -39,7 +39,7 @@
     "assemblyscript": "^0.9.4",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^5.1.1",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.5.0",
     "socket.io-client": "^2.2.0",
     "three": "^0.101.1",
     "typescript": "^3.4.5",
